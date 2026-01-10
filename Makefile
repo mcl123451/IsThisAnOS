@@ -16,7 +16,6 @@ LDFLAGS = -m elf_i386 -T linker.ld -nostdlib
 KERNEL_ELF = $(BUILD_DIR)/kernel.elf
 ISO_IMAGE = $(BUILD_DIR)/IsThisAnOS.iso
 
-# 添加所有需要的C文件
 C_SOURCES = \
     $(KERNEL_DIR)/main.c \
     $(KERNEL_DIR)/graphics.c \
@@ -52,7 +51,6 @@ iso: $(KERNEL_ELF) | $(BUILD_DIR)
 	$(GRUB_MKRESCUE) -o $(ISO_IMAGE) $(ISO_DIR) 2>/dev/null
 	@echo "✓ ISO created: $(ISO_IMAGE)"
 
-# 测试命令
 run: iso
 	@echo "Running kernel with graphics support..."
 	qemu-system-x86_64 -cdrom build/IsThisAnOS.iso -serial stdio -m 512M
@@ -63,4 +61,4 @@ run-text: $(KERNEL_ELF)
 clean:
 	rm -rf $(BUILD_DIR)
 
-.PHONY: all iso run run-iso run-text clean
+.PHONY: all iso run run-text clean
