@@ -3,7 +3,6 @@
 /* 声明图形函数 */
 extern void put_pixel(uint32_t x, uint32_t y, uint32_t color);
 
-/* 简单的8x16字体数据 - 只添加测试字符 */
 const uint8_t font_data[128][16] = {
     [0 ... 31] = {0},
     
@@ -87,48 +86,11 @@ const uint8_t font_data[128][16] = {
     [95] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7E, 0x00, 0x00}, // _
 };
 
-/* 绘制一个字符 - 添加调试输出 */
+/* 绘制一个字符 */
 void draw_char(uint32_t x, uint32_t y, char c, uint32_t color) {
     uint8_t index = (uint8_t)c;
     
-    // 调试输出
-    extern void serial_puts(const char* str);
-    char debug[64];
-    serial_puts("Drawing char: '");
-    // 临时存储字符
-    char temp[2] = {c, '\0'};
-    serial_puts(temp);
-    serial_puts("' at (");
-    
-    // 输出坐标
-    char num_str[16];
-    extern void utoa(uint32_t value, char* str, int base);
-    utoa(x, num_str, 10);
-    serial_puts(num_str);
-    serial_puts(", ");
-    utoa(y, num_str, 10);
-    serial_puts(num_str);
-    serial_puts(")\n");
-    
-    if (index >= 128) {
-        serial_puts("Char index out of range\n");
-        return;
-    }
-    
     const uint8_t* char_data = font_data[index];
-    
-    // 检查字体数据是否为空
-    int empty = 1;
-    for (int i = 0; i < 16; i++) {
-        if (char_data[i] != 0) {
-            empty = 0;
-            break;
-        }
-    }
-    
-    if (empty) {
-        serial_puts("Font data is empty for this char\n");
-    }
     
     // 绘制字符像素
     int pixels_drawn = 0;
@@ -142,11 +104,6 @@ void draw_char(uint32_t x, uint32_t y, char c, uint32_t color) {
         }
     }
     
-    // 输出绘制了多少像素
-    serial_puts("Pixels drawn: ");
-    utoa(pixels_drawn, num_str, 10);
-    serial_puts(num_str);
-    serial_puts("\n");
 }
 
 /* 绘制字符串 */
@@ -154,11 +111,6 @@ void draw_string(uint32_t x, uint32_t y, const char* str, uint32_t color) {
     uint32_t current_x = x;
     uint32_t current_y = y;
     
-    // 调试输出
-    extern void serial_puts(const char*);
-    serial_puts("Drawing string: \"");
-    serial_puts(str);
-    serial_puts("\"\n");
     
     while (*str) {
         if (*str == '\n') {

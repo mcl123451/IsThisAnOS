@@ -40,6 +40,8 @@ stack_bottom:
 stack_top:
 
 section .text
+
+; 入口点
 global _start
 extern kernel_main
 

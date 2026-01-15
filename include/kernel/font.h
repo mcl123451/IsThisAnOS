@@ -1,7 +1,7 @@
 #ifndef KERNEL_FONT_H
 #define KERNEL_FONT_H
 
-#include <kernel/types.h>
+#include <stdint.h>
 #include <kernel/graphics.h>  /* 添加图形头文件 */
 
 #define FONT_WIDTH 8

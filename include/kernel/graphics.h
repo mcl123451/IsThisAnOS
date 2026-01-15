@@ -1,7 +1,7 @@
 #ifndef KERNEL_GRAPHICS_H
 #define KERNEL_GRAPHICS_H
 
-#include <kernel/types.h>
+#include <stdint.h>
 
 /* 颜色定义 */
 #define COLOR_BLACK         0x000000
@@ -29,7 +29,7 @@ typedef struct {
 void put_pixel(uint32_t x, uint32_t y, uint32_t color);  /* 添加这一行 */
 void graphics_init(graphics_context_t* ctx, uint32_t* framebuffer, 
                    uint32_t width, uint32_t height, uint32_t pitch, uint8_t bpp);
-void graphics_draw_pixel(graphics_context_t* ctx, uint32_t x, uint32_t y, uint32_t color);
+void graphics_draw_pixel(graphics_context_t* ctx, int x, int y, uint32_t color);
 void graphics_clear_screen(graphics_context_t* ctx, uint32_t color);
 void graphics_draw_rect(graphics_context_t* ctx, uint32_t x, uint32_t y, 
                         uint32_t width, uint32_t height, uint32_t color);
@@ -43,5 +43,5 @@ void graphics_draw_char(graphics_context_t* ctx, uint32_t x, uint32_t y,
                        char c, uint32_t color);
 void graphics_draw_string(graphics_context_t* ctx, uint32_t x, uint32_t y, 
                          const char* str, uint32_t color);
-
+uint32_t graphics_get_pixel(graphics_context_t* ctx, int x, int y);
 #endif /* KERNEL_GRAPHICS_H */

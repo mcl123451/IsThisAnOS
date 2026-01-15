@@ -1,4 +1,3 @@
-/* IsThisAnOS - 字符串函数实现 */
 #include <kernel/string.h>
 
 size_t strlen(const char* str) {

@@ -1,7 +1,9 @@
 #ifndef KERNEL_STRING_H
 #define KERNEL_STRING_H
-
-#include <kernel/types.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdarg.h>
+#include <stdint.h>
 
 /* 可变参数支持 */
 typedef __builtin_va_list va_list;

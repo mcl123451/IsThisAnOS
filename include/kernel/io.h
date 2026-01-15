@@ -1,7 +1,7 @@
 #ifndef KERNEL_IO_H
 #define KERNEL_IO_H
 
-#include <kernel/types.h>
+#include <stdint.h>
 
 /* 端口 I/O */
 static inline uint8_t inb(uint16_t port) {
